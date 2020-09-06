@@ -30,15 +30,19 @@ module Lib
       File.open(filename_path).each do |line|
         log_line = LogLine.new(line)
         if log_line.valid?
-          url, ip = log_line.parse
-      
-          url_values << [url]
-          ip_values << [ip]
-          visits_values << [url, ip]
+          log_line.parse
         else
           invalid_lines << line
         end
       end
+    end
+
+    def parse(log_line)
+      url, ip = log_line.parse
+
+      url_values << [url]
+      ip_values << [ip]
+      visits_values << [url, ip]
     end
   end
 end

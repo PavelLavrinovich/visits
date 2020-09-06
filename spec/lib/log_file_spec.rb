@@ -5,7 +5,7 @@ require_relative '../../lib/log_file'
 
 RSpec.describe Lib::LogFile do
   describe '#load' do
-    let(:log_file) { Lib::LogFile.new('spec/fixtures/webserver_small.log') }
+    let(:log_file) { described_class.new('spec/fixtures/webserver_small.log') }
     let(:expected_visits_data) do
       [
         ['/help_page/1', '126.318.035.038'],
@@ -17,7 +17,7 @@ RSpec.describe Lib::LogFile do
         ['/help_page/1', '722.247.931.582'],
         ['/about', '061.945.150.735'],
         ['/help_page/1', '646.865.545.408'],
-        ['/home', '235.313.352.950'],
+        ['/home', '235.313.352.950']
       ]
     end
 
@@ -28,7 +28,7 @@ RSpec.describe Lib::LogFile do
     it 'stores the line'
 
     context 'with invalid line' do
-      let(:log_file) { Lib::LogFile.new('spec/fixtures/webserver_small_with_invalid.log') }
+      let(:log_file) { described_class.new('spec/fixtures/webserver_small_with_invalid.log') }
       let(:expected_visits_data) do
         [
           ['/help_page/1', '126.318.035.038'],
@@ -38,7 +38,7 @@ RSpec.describe Lib::LogFile do
           ['/index', '444.701.448.104'],
           ['/help_page/1', '722.247.931.582'],
           ['/help_page/1', '646.865.545.408'],
-          ['/home', '235.313.352.950'],
+          ['/home', '235.313.352.950']
         ]
       end
 
@@ -48,7 +48,7 @@ RSpec.describe Lib::LogFile do
 
       it 'adds the line to invalid group' do
         log_file.load
-        expect(log_file.invalid_lines).to eq(["first_invalid_line\n", "second_invalid_line\n"])
+        expect(log_file.invalid_lines).to eq(%W[first_invalid_line\n second_invalid_line\n])
       end
 
       it 'does not store the line'

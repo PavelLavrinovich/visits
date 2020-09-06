@@ -16,7 +16,7 @@ module Bin
 
       log_file = Lib::LogFile.new(filename_path)
       log_file.load
-      
+
       print_invalid_lines(log_file.invalid_lines) if log_file.invalid_lines.any?
     rescue ArgumentError => error
       puts error.message
