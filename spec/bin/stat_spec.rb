@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require_relative '../../bin/stat'
 
 RSpec.describe Bin::Stat do
   describe '#display' do
     let(:filename_path) { 'spec/fixtures/webserver.log' }
-
-    before do
-      run_stat(filename_path)
-    end
 
     it 'reads file with data'
 
@@ -29,31 +26,31 @@ RSpec.describe Bin::Stat do
     context 'when file is missing' do
       let(:filename_path) { 'spec/fixtures/missing.log' }
 
-      it 'handles file missing error'
-
-      it 'displays file missing error'
+      it 'displays file missing error' do
+        expect(run_stat(filename_path)).to eq("Log file is missing\n")
+      end
     end
 
     context 'when path is missing' do
       let(:filename_path) { 'spec/fixtures/missing/webserver.log' }
 
-      it 'handles path missing error'
-
-      it 'displays pass missing error'
+      it 'displays pass missing error' do
+        expect(run_stat(filename_path)).to eq("Path to the log file is missing\n")
+      end
     end
 
     context 'when file extension is invalid' do
       let(:filename_path) { 'spec/fixtures/webserver.invalid' }
 
-      it 'handles invalid file extension error'
-
-      it 'displays invalid file extension error'
+      it 'displays invalid file extension error' do
+        expect(run_stat(filename_path)).to eq("File extenstion is invalid (only .log is supported)\n")
+      end
     end
   end
 
   private
 
   def run_stat(filename_path)
-    system "ruby bin/stat.rb #{filename_path}"
+    `ruby bin/stat.rb #{filename_path}`
   end
 end
