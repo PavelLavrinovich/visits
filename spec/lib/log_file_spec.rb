@@ -48,7 +48,7 @@ RSpec.describe Lib::LogFile do
 
       it 'adds the line to invalid group' do
         log_file.load
-        expect(log_file.invalid_lines).to eq(['first_invalid_line', 'second_invalid_line'])
+        expect(log_file.invalid_lines).to eq(["first_invalid_line\n", "second_invalid_line\n"])
       end
 
       it 'does not store the line'
