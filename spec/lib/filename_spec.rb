@@ -13,7 +13,7 @@ RSpec.describe Lib::Filename do
     end
 
     context 'when filename_path is nil' do
-      let(:filename_path) { 'spec/fixtures/missing.log' }
+      let(:filename_path) { nil }
 
       it 'raises please provide file error' do
         expect { filename.validate }.to raise_error(ArgumentError, 'Please provide file')
