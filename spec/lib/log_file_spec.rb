@@ -25,8 +25,6 @@ RSpec.describe Lib::LogFile do
       expect(log_file.load).to eq(expected_visits_data)
     end
 
-    it 'validates every data line'
-
     it 'stores the line'
 
     context 'with invalid line' do
