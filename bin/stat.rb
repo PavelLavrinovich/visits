@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../lib/filename'
+
 module Bin
   class Stat
     def initialize(filename_path)
@@ -8,6 +10,8 @@ module Bin
 
     def display
       Lib::Filename.new(filename_path).validate
+    rescue ArgumentError => e
+      puts e.message
     end
 
     private
