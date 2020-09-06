@@ -2,3 +2,10 @@ require: rubocop-rspec
 
 AllCops:
   NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false

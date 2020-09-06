@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Lib
+  # Class to validate a filename
   class Filename
     EXTENSION = '.log'
 
@@ -9,10 +10,11 @@ module Lib
     end
 
     def validate
-      raise ArgumentError, 'Please provide file' if filename_path.nil?
+      raise ArgumentError, 'Please provide file' unless filename_path
       raise ArgumentError, 'Path to the log file is missing' unless File.directory?(File.dirname(filename_path))
-      raise ArgumentError, 'File extenstion is invalid (only .log is supported)' if File.extname(filename_path) != EXTENSION
+      raise ArgumentError, 'File extenstion is invalid' if File.extname(filename_path) != EXTENSION
       raise ArgumentError, 'Log file is missing' unless File.file?(filename_path)
+
       true
     end
 

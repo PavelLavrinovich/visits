@@ -6,7 +6,7 @@ require_relative '../../lib/filename'
 RSpec.describe Lib::Filename do
   describe '#validate' do
     let(:filename_path) { 'spec/fixtures/webserver.log' }
-    let(:filename) { Lib::Filename.new(filename_path) }
+    let(:filename) { described_class.new(filename_path) }
 
     it 'returns true for a valid file' do
       expect(filename.validate).to be_truthy
@@ -19,7 +19,6 @@ RSpec.describe Lib::Filename do
         expect { filename.validate }.to raise_error(ArgumentError, 'Please provide file')
       end
     end
-    
 
     context 'when file is missing' do
       let(:filename_path) { 'spec/fixtures/missing.log' }
@@ -41,7 +40,7 @@ RSpec.describe Lib::Filename do
       let(:filename_path) { 'spec/fixtures/webserver.invalid' }
 
       it 'raises invalid file extension error' do
-        expect { filename.validate }.to raise_error(ArgumentError, 'File extenstion is invalid (only .log is supported)')
+        expect { filename.validate }.to raise_error(ArgumentError, 'File extenstion is invalid')
       end
     end
   end

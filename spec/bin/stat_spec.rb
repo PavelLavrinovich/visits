@@ -30,7 +30,7 @@ RSpec.describe Bin::Stat do
         expect(run_stat(filename_path)).to eq("Please provide file\n")
       end
     end
-    
+
     context 'when file is missing' do
       let(:filename_path) { 'spec/fixtures/missing.log' }
 
@@ -51,7 +51,7 @@ RSpec.describe Bin::Stat do
       let(:filename_path) { 'spec/fixtures/webserver.invalid' }
 
       it 'displays invalid file extension error' do
-        expect(run_stat(filename_path)).to eq("File extenstion is invalid (only .log is supported)\n")
+        expect(run_stat(filename_path)).to eq("File extenstion is invalid\n")
       end
     end
   end

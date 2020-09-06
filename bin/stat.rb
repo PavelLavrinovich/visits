@@ -3,6 +3,7 @@
 require_relative '../lib/filename'
 
 module Bin
+  # Main class to display stat
   class Stat
     def initialize(filename_path)
       @filename_path = filename_path
@@ -10,8 +11,8 @@ module Bin
 
     def display
       Lib::Filename.new(filename_path).validate
-    rescue ArgumentError => e
-      puts e.message
+    rescue ArgumentError => error
+      puts error.message
     end
 
     private
