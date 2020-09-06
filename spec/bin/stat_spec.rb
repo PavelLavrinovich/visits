@@ -23,6 +23,14 @@ RSpec.describe Bin::Stat do
 
     it 'displays the stat'
 
+    context 'when filename_path is nil' do
+      let(:filename_path) { nil }
+
+      it 'displays file missing error' do
+        expect(run_stat(filename_path)).to eq("Please provide file\n")
+      end
+    end
+    
     context 'when file is missing' do
       let(:filename_path) { 'spec/fixtures/missing.log' }
 
