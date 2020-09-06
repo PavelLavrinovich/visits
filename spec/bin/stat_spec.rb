@@ -7,21 +7,17 @@ RSpec.describe Bin::Stat do
   describe '#display' do
     let(:filename_path) { 'spec/fixtures/webserver.log' }
 
-    it 'reads file with data'
-
-    it 'validates every data line'
-
-    it 'stores the line'
-
-    context 'with invalid line' do
-      it 'marks the line as invalid'
-
-      it 'displays invalid lines'
-    end
-
     it 'calculates stat with stored data lines'
 
     it 'displays the stat'
+
+    context 'with invalid line' do
+      let(:filename_path) { 'spec/fixtures/webserver.log' }
+
+      it 'displays invalid lines' do
+        expect(run_stat(filename_path)).to match("Warning: Empty lines\nfirst_invalid_line\nsecond_invalid_line\n")
+      end
+    end
 
     context 'when filename_path is nil' do
       let(:filename_path) { nil }
