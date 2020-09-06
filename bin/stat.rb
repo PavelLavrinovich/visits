@@ -12,12 +12,7 @@ module Bin
     end
 
     def display
-      Lib::Filename.new(filename_path).validate
-
-      log_file = Lib::LogFile.new(filename_path)
-      log_file.load
-
-      print_invalid_lines(log_file.invalid_lines) if log_file.invalid_lines.any?
+      validate_and_read_data
     rescue ArgumentError => error
       puts error.message
     end
@@ -26,7 +21,18 @@ module Bin
 
     attr_reader :filename_path
 
+    def validate_and_read_data
+      Lib::Filename.new(filename_path).validate
+
+      log_file = Lib::LogFile.new(filename_path)
+      log_file.load
+
+      print_invalid_lines(log_file.invalid_lines)
+    end
+
     def print_invalid_lines(invalid_lines)
+      return if invalid_lines.empty?
+
       puts 'Warning: Invalid lines'
       invalid_lines.each { |invalid_line| print invalid_line }
     end
