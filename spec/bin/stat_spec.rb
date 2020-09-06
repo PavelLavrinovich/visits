@@ -12,10 +12,10 @@ RSpec.describe Bin::Stat do
     it 'displays the stat'
 
     context 'with invalid line' do
-      let(:filename_path) { 'spec/fixtures/webserver.log' }
+      let(:filename_path) { 'spec/fixtures/webserver_small_with_invalid.log' }
 
       it 'displays invalid lines' do
-        expect(run_stat(filename_path)).to match("Warning: Empty lines\nfirst_invalid_line\nsecond_invalid_line\n")
+        expect(run_stat(filename_path)).to match("Warning: Invalid lines\nfirst_invalid_line\nsecond_invalid_line\n")
       end
     end
 

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'log_line'
+
 module Lib
   # Class to read and store a log file
   class LogFile
