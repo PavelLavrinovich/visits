@@ -4,9 +4,11 @@ require 'spec_helper'
 
 RSpec.describe Bin::Stat do
   describe '#display' do
-    it 'takes filename as an argument'
+    let(:filename_path) { 'spec/fixtures/webserver.log' }
 
-    it 'validates the filename'
+    before do
+      run_stat(filename_path)
+    end
 
     it 'reads file with data'
 
@@ -25,21 +27,33 @@ RSpec.describe Bin::Stat do
     it 'displays the stat'
 
     context 'when file is missing' do
+      let(:filename_path) { 'spec/fixtures/missing.log' }
+
       it 'handles file missing error'
 
       it 'displays file missing error'
     end
 
     context 'when path is missing' do
+      let(:filename_path) { 'spec/fixtures/missing/webserver.log' }
+
       it 'handles path missing error'
 
       it 'displays pass missing error'
     end
 
     context 'when file extension is invalid' do
+      let(:filename_path) { 'spec/fixtures/webserver.invalid' }
+
       it 'handles invalid file extension error'
 
       it 'displays invalid file extension error'
     end
+  end
+
+  private
+
+  def run_stat(filename_path)
+    system "ruby bin/stat.rb #{filename_path}"
   end
 end
