@@ -50,7 +50,7 @@ RSpec.describe Lib::LogFile do
         ['/home']
       ]
     end
-    
+
     before do
       allow(Models::Ip).to receive(:import)
       allow(Models::Url).to receive(:import)
@@ -124,12 +124,12 @@ RSpec.describe Lib::LogFile do
         load
         expect(Models::Ip).to have_received(:import).with(%i[id], expected_ips_data, on_duplicate_key_ignore: true)
       end
-  
+
       it 'calls Models::Url.import' do
         load
         expect(Models::Url).to have_received(:import).with(%i[id], expected_urls_data, on_duplicate_key_ignore: true)
       end
-  
+
       it 'calls Models::Visit.import' do
         load
         expect(Models::Visit).to have_received(:import).with(%i[url_id ip_id], expected_visits_data)

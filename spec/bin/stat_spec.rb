@@ -7,8 +7,6 @@ RSpec.describe Bin::Stat do
   describe '#display' do
     subject(:displayed_message) { run_stat(filename_path) }
 
-    it 'calculates stat with stored data lines'
-
     context 'with valid filename_path' do
       let(:filename_path) { 'spec/fixtures/webserver.log' }
 
