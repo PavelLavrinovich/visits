@@ -4,6 +4,10 @@
 
 This guide outlines the steps needed to parse your log file and get great stat.
 
+## Travis CI
+
+[![Build Status](https://travis-ci.com/PavelLavrinovich/visits.svg?branch=master)](https://travis-ci.com/PavelLavrinovich/visits)
+
 ## Goal
 
 There are some log file with the next format:
