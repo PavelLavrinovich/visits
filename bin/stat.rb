@@ -34,6 +34,7 @@ module Bin
 
     def calculate_and_display
       Models::Url.calculate
+      puts Models::Url.display
     end
 
     def print_invalid_lines(invalid_lines)

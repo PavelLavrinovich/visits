@@ -11,7 +11,7 @@ module Lib
     end
 
     def valid?
-      line_value =~ VALID_LINE_REGEXP
+      VALID_LINE_REGEXP.match?(line_value)
     end
 
     def parse

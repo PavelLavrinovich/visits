@@ -14,7 +14,7 @@ RSpec.describe Lib::LogLine do
     end
 
     context 'with invalid line' do
-      let(:log_line_value) { described_class.new('invalid_line') }
+      let(:log_line_value) { 'invalid_line' }
 
       it { is_expected.not_to be_valid }
     end
