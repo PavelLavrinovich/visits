@@ -2,6 +2,9 @@
 
 require_relative 'log_line'
 require_relative 'parsed_data'
+require_relative '../models/ip'
+require_relative '../models/visit'
+require_relative '../models/url'
 
 module Lib
   # Class to read and store a log file
@@ -17,6 +20,7 @@ module Lib
 
     def load
       read
+      store
       parsed_data.visit_values
     end
 
@@ -32,6 +36,14 @@ module Lib
         else
           invalid_lines << line
         end
+      end
+    end
+
+    def store
+      ActiveRecord::Base.transaction do
+        Models::Ip.import(%i[id], parsed_data.ip_values, on_duplicate_key_ignore: true)
+        Models::Visit.import(%i[url_id ip_id], parsed_data.visit_values)
+        Models::Url.import(%i[id], parsed_data.url_values, on_duplicate_key_ignore: true)
       end
     end
 

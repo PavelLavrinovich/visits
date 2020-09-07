@@ -3,7 +3,6 @@
 require 'pry'
 require_relative '../lib/filename'
 require_relative '../lib/log_file'
-require_relative '../db/schema'
 
 module Bin
   # Main class to display stat
