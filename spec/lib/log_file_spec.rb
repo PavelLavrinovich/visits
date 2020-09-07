@@ -22,10 +22,13 @@ RSpec.describe Lib::LogFile do
         ['/home', '235.313.352.950']
       ]
     end
+    let(:total_lines) { 10 }
 
     it { is_expected.to eq(expected_visits_data) }
 
-    it 'stores the line'
+    it { expect { load }.to change { Models::Ip.count }.by(total_lines) }
+    it { expect { load }.to change { Models::Url.count }.by(total_lines) }
+    it { expect { load }.to change { Models::Visit.count }.by(total_lines) }
 
     context 'with invalid line' do
       let(:log_file) { described_class.new('spec/fixtures/webserver_small_with_invalid.log') }
@@ -41,6 +44,7 @@ RSpec.describe Lib::LogFile do
           ['/home', '235.313.352.950']
         ]
       end
+      let(:total_lines) { 8 }
 
       it { is_expected.to eq(expected_visits_data) }
 
@@ -49,7 +53,9 @@ RSpec.describe Lib::LogFile do
         expect(log_file.invalid_lines).to eq(%W[first_invalid_line\n second_invalid_line\n])
       end
 
-      it 'does not store the line'
+      it { expect { load }.to change { Models::Ip.count }.by(total_lines) }
+      it { expect { load }.to change { Models::Url.count }.by(total_lines) }
+      it { expect { load }.to change { Models::Visit.count }.by(total_lines) }
     end
   end
 end
