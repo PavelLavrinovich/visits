@@ -3,6 +3,7 @@
 require 'pry'
 require_relative '../lib/filename'
 require_relative '../lib/log_file'
+require_relative '../models/url'
 
 module Bin
   # Main class to display stat
@@ -13,6 +14,7 @@ module Bin
 
     def display
       validate_and_read_data
+      calculate_and_display
     rescue ArgumentError => error
       puts error.message
     end
@@ -28,6 +30,10 @@ module Bin
       log_file.load
 
       print_invalid_lines(log_file.invalid_lines)
+    end
+
+    def calculate_and_display
+      Models::Url.calculate
     end
 
     def print_invalid_lines(invalid_lines)

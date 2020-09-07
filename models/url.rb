@@ -8,6 +8,9 @@ module Models
     has_many :visits
     has_many :ips, -> { distinct }, through: :visits
 
+    scope :ordered_by_visits_count, -> { order(visits_count: :desc) }
+    scope :ordered_by_ips_count, -> { order(ips_count: :desc) }
+
     def self.calculate
       urls_data = all.map { |url| [url.id, url.visits.count, url.ips.count] }
 
