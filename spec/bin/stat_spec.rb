@@ -5,50 +5,44 @@ require_relative '../../bin/stat'
 
 RSpec.describe Bin::Stat do
   describe '#display' do
-    let(:filename_path) { 'spec/fixtures/webserver.log' }
+    subject(:displayed_message) { run_stat(filename_path) }
 
     it 'calculates stat with stored data lines'
 
-    it 'displays the stat'
+    context 'with valid filename_path' do
+      let(:filename_path) { 'spec/fixtures/webserver.log' }
+
+      it 'displays the stat'
+    end
 
     context 'with invalid line' do
       let(:filename_path) { 'spec/fixtures/webserver_small_with_invalid.log' }
 
-      it 'displays invalid lines' do
-        expect(run_stat(filename_path)).to match("Warning: Invalid lines\nfirst_invalid_line\nsecond_invalid_line\n")
-      end
+      it { is_expected.to match("Warning: Invalid lines\nfirst_invalid_line\nsecond_invalid_line\n") }
     end
 
     context 'when filename_path is nil' do
       let(:filename_path) { nil }
 
-      it 'displays file missing error' do
-        expect(run_stat(filename_path)).to eq("Please provide file\n")
-      end
+      it { is_expected.to eq("Please provide file\n") }
     end
 
     context 'when file is missing' do
       let(:filename_path) { 'spec/fixtures/missing.log' }
 
-      it 'displays file missing error' do
-        expect(run_stat(filename_path)).to eq("Log file is missing\n")
-      end
+      it { is_expected.to eq("Log file is missing\n") }
     end
 
     context 'when path is missing' do
       let(:filename_path) { 'spec/fixtures/missing/webserver.log' }
 
-      it 'displays pass missing error' do
-        expect(run_stat(filename_path)).to eq("Path to the log file is missing\n")
-      end
+      it { is_expected.to eq("Path to the log file is missing\n") }
     end
 
     context 'when file extension is invalid' do
       let(:filename_path) { 'spec/fixtures/webserver.invalid' }
 
-      it 'displays invalid file extension error' do
-        expect(run_stat(filename_path)).to eq("File extenstion is invalid\n")
-      end
+      it { is_expected.to eq("File extenstion is invalid\n") }
     end
   end
 

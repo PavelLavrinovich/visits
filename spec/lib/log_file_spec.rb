@@ -5,6 +5,8 @@ require_relative '../../lib/log_file'
 
 RSpec.describe Lib::LogFile do
   describe '#load' do
+    subject(:load) { log_file.load }
+
     let(:log_file) { described_class.new('spec/fixtures/webserver_small.log') }
     let(:expected_visits_data) do
       [
@@ -21,9 +23,7 @@ RSpec.describe Lib::LogFile do
       ]
     end
 
-    it 'reads file with data' do
-      expect(log_file.load).to eq(expected_visits_data)
-    end
+    it { is_expected.to eq(expected_visits_data) }
 
     it 'stores the line'
 
@@ -42,12 +42,10 @@ RSpec.describe Lib::LogFile do
         ]
       end
 
-      it 'reads file with only valid data' do
-        expect(log_file.load).to eq(expected_visits_data)
-      end
+      it { is_expected.to eq(expected_visits_data) }
 
       it 'adds the line to invalid group' do
-        log_file.load
+        load
         expect(log_file.invalid_lines).to eq(%W[first_invalid_line\n second_invalid_line\n])
       end
 
