@@ -4,13 +4,9 @@
 
 This guide outlines the steps needed to parse your log file and get great stat.
 
-## Travis CI
-
-[![Build Status](https://travis-ci.com/PavelLavrinovich/visits.svg?branch=master)](https://travis-ci.com/PavelLavrinovich/visits)
-
 ## Goal
 
-There are some log file with the next format:
+There are some log files with the next format:
 
 /help_page/1 126.318.035.038
 /contact 184.123.665.067
@@ -65,6 +61,20 @@ It's rspec, so, it's just
 $ rspec
 ```
 
+## Code linters
+
+Rubocop
+
+```sh
+$ rubocop
+```
+
+Reek
+
+```sh
+$ reek
+```
+
 ## Description
 
 To achieve the goal there is should be some data structure with an efficient reading, but still it should be ordered. Relational database (Sqlite for now) has been chosen as a possible solution.
@@ -77,7 +87,9 @@ So the app just split every log line and store the url to the url.id and visits.
 - use mysql/postresql instead of sqlite
 - add batch processing
 - check count queries
+- check memory usage
 - use migrations instead of schema loading
 - line validation looks too simple
 - it might be great to have some factories as well
+- add CI
 - get some sleep
