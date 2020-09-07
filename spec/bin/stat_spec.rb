@@ -9,8 +9,14 @@ RSpec.describe Bin::Stat do
 
     context 'with valid filename_path' do
       let(:filename_path) { 'spec/fixtures/webserver.log' }
+      let(:exptected_stat) do
+        "/about/2 90 visits\n/contact 89 visits
+        /index 82 visits\n/about 81 visits\n/help_page/1 80 visits\n/home 78 visits
+        /help_page/1 23 unique views\n/contact 23 unique views\n/home 23 unique views
+        /index 23 unique views\n/about/2 22 unique views\n/about 21 unique views"
+      end
 
-      it 'displays the stat'
+      it { is_expected.to match(exptected_stat) }
     end
 
     context 'with invalid line' do
