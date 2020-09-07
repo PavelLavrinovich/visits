@@ -24,25 +24,25 @@ RSpec.describe Bin::Stat do
     context 'when filename_path is nil' do
       let(:filename_path) { nil }
 
-      it { is_expected.to eq("Please provide file\n") }
+      it { is_expected.to match("Please provide file\n") }
     end
 
     context 'when file is missing' do
       let(:filename_path) { 'spec/fixtures/missing.log' }
 
-      it { is_expected.to eq("Log file is missing\n") }
+      it { is_expected.to match("Log file is missing\n") }
     end
 
     context 'when path is missing' do
       let(:filename_path) { 'spec/fixtures/missing/webserver.log' }
 
-      it { is_expected.to eq("Path to the log file is missing\n") }
+      it { is_expected.to match("Path to the log file is missing\n") }
     end
 
     context 'when file extension is invalid' do
       let(:filename_path) { 'spec/fixtures/webserver.invalid' }
 
-      it { is_expected.to eq("File extenstion is invalid\n") }
+      it { is_expected.to match("File extenstion is invalid\n") }
     end
   end
 

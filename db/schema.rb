@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'initializer'
+require_relative 'config'
 
 ActiveRecord::Schema.define do
   create_table :ips, force: true, id: :string
